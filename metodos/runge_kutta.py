@@ -19,7 +19,7 @@ def runge_kutta(h, n, f, x_0, y_0, verbose=False):
 
 	return x, y
 
-def runge_kutta_sistema(h, n, f, g, x_0, y_0, t_0):
+def runge_kutta_sistema(h, n, f, g, t_0, x_0, y_0):
 	''' Implementación del método de Runge-Kutta para sistemas de dos
 		ecuaciones diferenciales.
 		Devuelve una lista de tuplas (t, x, y) con los resultados de
@@ -38,17 +38,17 @@ def runge_kutta_sistema(h, n, f, g, x_0, y_0, t_0):
 
 	#bucle para obtener una muestra de n valores
 	for i in range(n):
-		k1 = h * f(x, y, t) #cálculo de los coeficientes
-		l1 = h * g(x, y, t)
+		k1 = h * f(t, x, y) #cálculo de los coeficientes
+		l1 = h * g(t, x, y)
 
-		k2 = h * f(x + k1 / 2, y + l1 / 2, t + h / 2)
-		l2 = h * g(x + k1 / 2, y + l1 / 2, t + h / 2)
+		k2 = h * f(t + h / 2, x + k1 / 2, y + l1 / 2)
+		l2 = h * g(t + h / 2, x + k1 / 2, y + l1 / 2)
 
-		k3 = h * f(x + k2 / 2, y + l2 / 2, t + h / 2)
-		l3 = h * g(x + k2 / 2, y + l2 / 2, t + h / 2)
+		k3 = h * f(t + h / 2, x + k2 / 2, y + l2 / 2)
+		l3 = h * g(t + h / 2, x + k2 / 2, y + l2 / 2)
 
-		k4 = h * f(x + k3, y + l3, t + h)
-		l4 = h * g(x + k3, y + l3, t + h)
+		k4 = h * f(t + h, x + k3, y + l3)
+		l4 = h * g(t + h, x + k3, y + l3)
 
 		#incremento de las variables dependientes (x, y)
 		# y de la independiente (t)
