@@ -65,3 +65,24 @@ def runge_kutta_sistema(h, n, f, g, x_0, y_0, t_0):
 		tabla.append((t, x, y))
 
 	return tabla
+
+def runge_kutta_fehlberg(h, n, f, x_0, y_0, verbose=False):
+	x = x_0
+	y = y_0
+
+	for i in range(n):
+		k1 = h * f(x, y)
+		k2 = h * f(x + h / 4, y + k1 / 4)
+		k3 = h * f(x + 3 * h / 8, y + 3 * k1 / 32 + 9 * k2 / 32)
+		k4 = h * f(x + 12 * h / 13, y + 1932 * k1 / 2197 - 7200 * k2 / 2197 + 7296 * k3 / 2197)
+		k5 = h * f(x + h, y + 439 * k1 / 216 - 8 * k2 + 3680 * k3 / 513 - 845 * k4 / 4104)
+		k6 = h * f(x + h / 2, y - 8 * k1 / 27 + 2 * k2 - 3544 * k3 / 2565 + 1859 * k4 / 4104 - 11 * k5 / 40)
+
+		if verbose: print "%.1f \t %.7f \t %.7f \t %.7f \t %.7f \t %.7f \t %.7f \t %.7f" % (x, y, k1, k2, k3, k4, k5, k6)
+
+		y = y + 16 * k1 / 135 + 6656 * k3 / 12825 + 28561 * k4 / 56430 - 9 * k5 / 50 + 2 * k6 / 55
+		error = k1 / 360 - 128 * k3 / 4275 - 2197 * k4 / 75240 + k5 / 50 + 2 * k6 / 55
+
+		x += h
+
+	return (x, y, error)
