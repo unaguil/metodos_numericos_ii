@@ -1,14 +1,21 @@
 # -*- coding: utf8 -*-
 from math import sin, cos, pi
 
-def part1(n, x):
+def an_part1(n, x):
 	return -x * cos(n * pi * x) + sin(n * pi * x) / (n * pi)
 
-def part2(n, x):
-	return -cos(n * pi * x) / (n * pi) - 1 / (n * pi) * part1(n, x)
+def an_part2(n, x):
+	return -cos(n * pi * x) / (n * pi) - 1 / (n * pi) * an_part1(n, x)
 
 def calcular_an(n, x):
-	return 2 / (3 * n * pi) * part1(n, 0.6) - part1(n, 0) + part2(n, 1) - part2(n, 0.6)
+	return 2 / (3 * n * pi) * an_part1(n, 0.6) - an_part1(n, 0.0) + an_part2(n, 1.0) - an_part2(n, 0.6)
+
+def bn_part(n, x):
+	numerador = (2 - pi*pi * n*n * (x - 1) * x) * cos(n * pi * x) + pi * n * (2 * x -  1) * sin (n * pi * x)
+	return numerador / (pi*pi*pi * n*n*n)
+
+def calcular_bn(n, x):
+	return 2 * (bn_part(n, 1.0) - bn_part(n, 0.0))
 
 def calcular_ux0(x, num):
 	ux = 0
@@ -18,6 +25,22 @@ def calcular_ux0(x, num):
 
 	return ux
 
+def calcular_dudx0(x, num):
+	dudx = 0
+
+	for n in range(1, num):
+		dudx += calcular_bn(n, x) * sin(n * pi * x)
+
+	return dudx
+
+print "Forma inicial"
 for i in range(11):
 	x = i * 0.1
 	print "%.2f \t %.2f" % (x, calcular_ux0(x, 100))
+
+print ""
+print ""
+print "Velocidad inicial"
+for i in range(11):
+	x = i * 0.1
+	print "%.2f \t %.2f" % (x, calcular_dudx0(x, 100))
