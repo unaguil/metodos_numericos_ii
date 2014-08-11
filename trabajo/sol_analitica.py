@@ -72,8 +72,8 @@ def get_values(t, num_div):
 
 fig, ax = plt.subplots()
 
-num_div_x = 10
-dt = 0.05
+num_div_x = 50
+dt = 0.025
 steps = 100
 for s in range(steps):
 	t = dt * s
@@ -86,4 +86,4 @@ for s in range(steps):
 		new_x_values, new_y_values = get_values(t, num_div_x)
 		points.set_data(new_x_values, new_y_values)
 
-	plt.pause(0.25)
+	plt.pause(0.005)
