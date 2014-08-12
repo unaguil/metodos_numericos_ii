@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt 
 import numpy as np
 
-from math import sin, cos, pi
+from math import sin, cos, pi, sqrt
 
 def an_part1(n, x):
 	return -x * cos(n * pi * x) + sin(n * pi * x) / (n * pi)
@@ -28,7 +28,7 @@ def calcular_y(x, t, c, num_serie):
 
 	return y
 
-def get_values(t, num_div):
+def get_values(t, num_div, c):
 	x_values = []
 	y_values = []
 
@@ -37,25 +37,42 @@ def get_values(t, num_div):
 	x = 0
 	for i in range(num_div + 1):
 		x_values.append(x)
-		y_values.append(calcular_y(x, t, 1.0, 100))
+		y_values.append(calcular_y(x, t, c, 100))
 		x += dx
 
 	return (x_values, y_values)
 
-fig, ax = plt.subplots()
+if __name__ == '__main__':
+	T = 10
+	g = 9.8
+	w = 500
+	L = 1
 
-num_div_x = 50
-dt = 0.025
-steps = 100
-for s in range(steps):
-	t = dt * s
-	if s == 0:
-		x_values, y_values = get_values(t, num_div_x)
-		points, = ax.plot(x_values, y_values, marker='o', linestyle='-')
-		ax.set_xlim(0, 1) 
-		ax.set_ylim(-0.5, 0.5) 
-	else:
-		new_x_values, new_y_values = get_values(t, num_div_x)
-		points.set_data(new_x_values, new_y_values)
+	c = sqrt(T * g / w)
 
-	plt.pause(0.005)
+	fig, ax = plt.subplots()
+
+	num_div_x = 10
+	dt = 0.2259
+	pasos = 40
+	for s in range(pasos):
+		t = dt * s
+		if s == 0:
+			x_values, y_values = get_values(t, num_div_x, c)
+			points, = ax.plot(x_values, y_values, marker='o', linestyle='-')
+			ax.set_xlim(0, 1) 
+			ax.set_ylim(-0.5, 0.5) 
+		else:
+			new_x_values, new_y_values = get_values(t, num_div_x, c)
+			points.set_data(new_x_values, new_y_values)
+
+		plt.pause(0.005)
+
+
+	for s in range(pasos):
+		t = dt * s
+		print "%d \t %0.4f" % (s, t),
+		y_values = get_values(t, num_div_x, c)[1]
+		for i in range(len(y_values)):
+			print "\t %.2f" % y_values[i],
+		print ""
