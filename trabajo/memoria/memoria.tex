@@ -38,9 +38,10 @@ En el caso del problema propuesto, las condiciones iniciales son
 	&y(x)|_{t=0} = \frac{1}{2}(1 - x),~~~~~~~~~ \frac{3}{5} <= x <= 1\\
 	&\frac{\partial{y}}{\partial{t}}|_{t=0} = x(x-1)
 \end{flalign}
+\label{eq:condiciones_iniciales}
 \end{subequations}
 
-\section{Método de solución}
+\section{Método numérico}
 La ecuación puede ser resuelta de forma numérica mediante la substitución de las derivadas
 por aproximaciones con diferencias finitas. Así, cada una de las derivadas que aparecen
 pueden substituirse por las siguientes aproximaciones
@@ -74,12 +75,9 @@ Si en la expresión anterior el valor $\frac{Tg(\Delta{t})^2}{\rho(\Delta{x})^2}
 a la unidad y se despeja el desplazamiento $y^{j+1}_i$, que resulta al final del paso de
 tiempo actual, se obtiene la siguiente expresión
 
-% \begin{equation}
-% y^{j+1}_i = y^j_{i+1} + y^j_{i-1} - y^{j-1}_i - B\frac{\Delta{t}}{2}(y^{j+1}_i - y^{j-1}_i)
-% \end{equation}
-
 \begin{equation}
 y^{j+1}_i = \frac{y^j_{i+1} + y^j_{i-1} + (\frac{B\Delta{t}}{2} - 1)y^{j-1}_i}{(\frac{B\Delta{t}}{2} + 1)}
+\label{eq:pasos_siguientes}
 \end{equation}
 
 que permite calcular el valor de un nodo i a partir de la información de los nodos vecinos
@@ -119,6 +117,69 @@ la siguiente expresión para el paso inicial del método numérico
 \begin{equation}
 y^1_i = \frac{y^0_{i+1} + y^0_{i-1}}{2} + \Delta{t}\frac{\partial{y}}{\partial{x}}|_{t=0}
 	- \frac{B\Delta{t}^2}{2}\frac{\partial{y}}{\partial{x}}|_{t=0}
+\label{eq:paso_inicial}
 \end{equation}
+
+\section{Caso no amortiguado}
+Para el caso de la cuerda vibrante sin amortiguamiento, las ecuaciones para su
+solución mediante el método numérico por aproximación de diferencias finitas se obtienen
+haciendo $B=0$ en las ecuaciones \ref{eq:pasos_siguientes} y \ref{eq:paso_inicial}. Además,
+se ha llevado a cabo la substitución de $\frac{\partial{y}}{\partial{x}}|_{t=0}$ por la
+expresión indicada por las condiciones iniciales del problema.
+
+\begin{subequations}
+\begin{flalign}
+	&y^1_i = \frac{y^0_{i+1} + y^0_{i-1}}{2} + x(x-1)\Delta{t}\\
+	&y^{j+1}_i = y^j_{i+1} + y^j_{i-1} - y^{j-1}_i
+\end{flalign}
+\end{subequations}
+
+Utilizando las expresiones anteriores de forma iterativa e inicializando los valores de
+los nodos de la cuerda segun las condiciones indicadas en el problema
+(eq. \ref{eq:condiciones_iniciales}) se obtienen los resultados recogidos en la Tabla 
+\ref{tab:est_freq} para la posición de la cuerda en pasos consecutivos de tiempo. 
+
+\begin{table}
+\begin{small}
+\begin{tabular}{ c c c c c c c c c c c c }
+\hline
+Paso & 0.00 & 0.10 & 0.20 & 0.30 & 0.40 & 0.50 & 0.60 & 0.70 & 0.80 & 0.90 & 1.00 \\
+\hline
+\hline
+0 & 0.00 & 0.03 & 0.07 & 0.10 & 0.13 & 0.17 & 0.20 & 0.15 & 0.10 & 0.05 & 0.00 \\
+1 & 0.00 & 0.03 & 0.07 & 0.10 & 0.13 & 0.16 & 0.16 & 0.15 & 0.10 & 0.05 & 0.00 \\
+2 & 0.00 & 0.03 & 0.06 & 0.10 & 0.13 & 0.12 & 0.11 & 0.11 & 0.10 & 0.05 & 0.00 \\
+3 & 0.00 & 0.03 & 0.06 & 0.10 & 0.09 & 0.08 & 0.07 & 0.06 & 0.06 & 0.05 & 0.00 \\
+4 & 0.00 & 0.03 & 0.06 & 0.05 & 0.04 & 0.04 & 0.03 & 0.02 & 0.01 & 0.01 & 0.00 \\
+5 & 0.00 & 0.03 & 0.02 & 0.01 & 0.00 & -0.01 & -0.01 & -0.02 & -0.03 & -0.04 & 0.00 \\
+6 & 0.00 & -0.01 & -0.02 & -0.03 & -0.04 & -0.05 & -0.06 & -0.06 & -0.07 & -0.04 & 0.00 \\
+7 & 0.00 & -0.05 & -0.06 & -0.07 & -0.08 & -0.09 & -0.10 & -0.10 & -0.07 & -0.03 & 0.00 \\
+8 & 0.00 & -0.05 & -0.10 & -0.11 & -0.12 & -0.13 & -0.14 & -0.10 & -0.07 & -0.03 & 0.00 \\
+9 & 0.00 & -0.05 & -0.10 & -0.15 & -0.16 & -0.17 & -0.14 & -0.10 & -0.07 & -0.03 & 0.00 \\
+10 & 0.00 & -0.05 & -0.10 & -0.15 & -0.20 & -0.17 & -0.13 & -0.10 & -0.07 & -0.03 & 0.00 \\
+11 & 0.00 & -0.05 & -0.10 & -0.15 & -0.16 & -0.16 & -0.13 & -0.10 & -0.07 & -0.03 & 0.00 \\
+12 & 0.00 & -0.05 & -0.10 & -0.11 & -0.11 & -0.12 & -0.13 & -0.10 & -0.06 & -0.03 & 0.00 \\
+13 & 0.00 & -0.05 & -0.06 & -0.06 & -0.07 & -0.08 & -0.09 & -0.10 & -0.06 & -0.03 & 0.00 \\
+14 & 0.00 & -0.01 & -0.01 & -0.02 & -0.03 & -0.04 & -0.04 & -0.05 & -0.06 & -0.03 & 0.00 \\
+15 & 0.00 & 0.04 & 0.03 & 0.02 & 0.01 & 0.01 & -0.00 & -0.01 & -0.02 & -0.03 & 0.00 \\
+16 & 0.00 & 0.04 & 0.07 & 0.06 & 0.06 & 0.05 & 0.04 & 0.03 & 0.02 & 0.01 & 0.00 \\
+17 & 0.00 & 0.03 & 0.07 & 0.10 & 0.10 & 0.09 & 0.08 & 0.07 & 0.06 & 0.05 & 0.00 \\
+18 & 0.00 & 0.03 & 0.07 & 0.10 & 0.14 & 0.13 & 0.12 & 0.11 & 0.10 & 0.05 & 0.00 \\
+19 & 0.00 & 0.03 & 0.07 & 0.10 & 0.14 & 0.17 & 0.16 & 0.15 & 0.10 & 0.05 & 0.00 \\
+\hline
+20 & 0.00 & 0.03 & 0.07 & 0.10 & 0.13 & 0.17 & 0.20 & 0.15 & 0.10 & 0.05 & 0.00 \\
+\hline
+21 & 0.00 & 0.03 & 0.07 & 0.10 & 0.13 & 0.16 & 0.16 & 0.15 & 0.10 & 0.05 & 0.00 \\
+22 & 0.00 & 0.03 & 0.06 & 0.10 & 0.13 & 0.12 & 0.11 & 0.11 & 0.10 & 0.05 & 0.00 \\
+23 & 0.00 & 0.03 & 0.06 & 0.10 & 0.09 & 0.08 & 0.07 & 0.06 & 0.06 & 0.05 & 0.00 \\
+24 & 0.00 & 0.03 & 0.06 & 0.05 & 0.04 & 0.04 & 0.03 & 0.02 & 0.01 & 0.01 & 0.00 \\
+25 & 0.00 & 0.03 & 0.02 & 0.01 & 0.00 & -0.01 & -0.01 & -0.02 & -0.03 & -0.04 & 0.00 \\
+\hline
+\end{tabular}
+
+\end{small}
+\label{tab:est_freq}
+\end{table}
+
 
 \end{document}

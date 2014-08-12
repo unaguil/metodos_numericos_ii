@@ -43,7 +43,7 @@ def get_values(t, num_div, c):
 	return (x_values, y_values)
 
 if __name__ == '__main__':
-	T = 10
+	T = 10000
 	g = 9.8
 	w = 500
 	L = 1
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
 	num_div_x = 10
 	dt = 0.2259
-	pasos = 40
+	pasos = 25
 	for s in range(pasos):
 		t = dt * s
 		if s == 0:
