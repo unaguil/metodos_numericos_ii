@@ -193,10 +193,23 @@ f = \frac{1}{n \Delta{t}} = \frac{1}{20 * 0.0071} = 7.04~Hz
 \end{equation}
 
 \subsection{Solución analítica}
+\label{sec:sol_analitica}
 
 \subsection{Precisión del método}
 
-Las tablas  
+Las tablas \ref{tab:comparativa1}, \ref{tab:comparativa2} y \ref{tab:comparativa3} los
+resultados de posición para diferentes intervalos $\Delta{x}$ y entre paréntesis se muestra
+el error $\epsilon = |y_i - y_{analitico}|$ para cada valor calculado utilizando el valor
+proporcionado para el $(x,t)$ correspondiente por la solución analítica de la sección 
+\ref{sec:sol_analitica}.
+
+Como puede observarse, aun con una división en intervalos de $Delta{x} = 0.2 cm$, se 
+obtiene una buena precisión comparada con la solución analítica, ya que existe únicamente
+una diferencia a partir de la 4 cifra decimal. Es diferencia se reduce, como puede
+observarse en las siguientes tablas, al incrementar el número de intervalos en los que se
+divide la cuerda, lo que reduce no solamente el valor de $\Delta{x}$ sino también el de
+$\Delta{t}$ que se encuentra relacionado directamente con este, por lo que es necesario
+llevar a cabo un mayor número de calculos para llegar a los mismos instantes de tiempo.
 
 \begin{table}
 \center
@@ -217,8 +230,8 @@ Paso & 0.20 & 0.40 & 0.60 & 0.80 \\
 9 & 0.0690 (0.0002) & 0.1368 (0.0006) & 0.1201 (0.0002) & 0.1023 (0.0006) \\
 10 & 0.0667 (0.0000) & 0.1333 (0.0000) & 0.2000 (0.0008) & 0.1000 (0.0000) \\
 \end{tabular}
-\caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 5$}
-\label{eq:compartiva1}
+\caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 0.2$ cm}
+\label{tab:comparativa1}
 \end{table}
 
 \begin{table}
@@ -240,8 +253,8 @@ Paso & 0.10 & 0.20 & 0.30 & 0.40 \\
 9 & -0.0506 (0.0000) & -0.1011 (0.0000) & -0.1515 (0.0004) & -0.1600 (0.0000) \\
 10 & -0.0500 (0.0000) & -0.1000 (0.0000) & -0.1500 (0.0000) & -0.2000 (0.0008) \\
 \end{tabular}
-\caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 10$}
-\label{eq:compartiva2}
+\caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 0.1$ cm}
+\label{tab:comparativa2}
 \end{table}
 
 \begin{table}
@@ -264,8 +277,8 @@ Paso & 0.05 & 0.10 & 0.15 & 0.20 \\
 10 & 0.0158 (0.0000) & 0.0316 (0.0004) & 0.0266 (0.0000) & 0.0216 (0.0000) \\
 \end{tabular}
 
-\caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 20$}
-\label{eq:compartiva2}
+\caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 0.05$ cm}
+\label{tab:comparativa3}
 \end{table}
 
 \end{document}
