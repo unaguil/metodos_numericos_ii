@@ -79,16 +79,16 @@ for s in range(len(tabla)):
 
 	plt.pause(0.005)
 
-# print "Pasos",
-# for i in range(5):
-# 	print "\t %.2f" % (dx * i),
+print "Pasos",
+for i in range(5):
+	print "\t %.2f" % (dx * i),
 
-# print ""
-# print ""
-# for i in range(len(tabla)):
-# 	print i,
-# 	t = dt * i
-# 	_, sol_analitica = get_values(t, num_div)
-# 	for n in range(5):
-# 		print "\t %.4f (%.4f)" % (tabla[i][n], abs(tabla[i][n] - sol_analitica[n])),
-# 	print ""
+print ""
+print ""
+for i in range(len(tabla)):
+	print i,
+	t = dt * i
+	_, sol_analitica = get_values(t, num_div, c)
+	for n in range(5):
+		print "\t %.4f (%.4f)" % (tabla[i][n], abs(tabla[i][n] - sol_analitica[n])),
+	print ""
