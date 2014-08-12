@@ -60,21 +60,21 @@ print "dx = %.4f" % dx
 print "dt = %.4f" % dt
 print "f = %.2f" % (1 / (20 * 0.0071))
 
-print "\\begin{tabular}{%s }" % (" c" * (len(tabla[0]) + 1))
-print "\hline"
-print "Paso",
-for i in range(len(tabla[0])):
-	print "& %.2f" % (dx * i),
-print "\\\\"	
-print "\hline"
-print "\hline"
-for i in range(len(tabla)):
-	print i,
-	for n in range(len(tabla[i])):
-		print "& %.2f" % tabla[i][n],
-	print "\\\\"
-print "\hline"
-print "\\end{tabular}"
+# print "\\begin{tabular}{%s }" % (" c" * (len(tabla[0]) + 1))
+# print "\hline"
+# print "Paso",
+# for i in range(len(tabla[0])):
+# 	print "& %.2f" % (dx * i),
+# print "\\\\"	
+# print "\hline"
+# print "\hline"
+# for i in range(len(tabla)):
+# 	print i,
+# 	for n in range(len(tabla[i])):
+# 		print "& %.2f" % tabla[i][n],
+# 	print "\\\\"
+# print "\hline"
+# print "\\end{tabular}"
 
 # fig, ax = plt.subplots()
 
@@ -92,16 +92,20 @@ print "\\end{tabular}"
 
 # 	plt.pause(0.005)
 
-# print "Pasos",
-# for i in range(5):
-# 	print "\t %.2f" % (dx * i),
-
-# print ""
-# print ""
-# for i in range(len(tabla)):
-# 	print i,
-# 	t = dt * i
-# 	_, sol_analitica = get_values(t, num_div, c)
-# 	for n in range(5):
-# 		print "\t %.4f (%.4f)" % (tabla[i][n], abs(tabla[i][n] - sol_analitica[n])),
-# 	print ""
+columns = 5
+print "\\begin{tabular}{%s }" % (" c" * columns)
+print "\hline"
+print "Paso",
+for i in range(1, columns):
+	print "& %.2f" % (dx * i),
+print "\\\\"	
+print "\hline"
+print "\hline"
+for i in range(len(tabla)):
+	print i,
+	t = dt * i
+	_, sol_analitica = get_values(t, num_div, c)
+	for n in range(1, columns):
+		print "& %.4f (%.4f)" % (tabla[i][n], abs(tabla[i][n] - sol_analitica[n])),
+	print "\\\\"
+print "\\end{tabular}"
