@@ -67,6 +67,7 @@ de donde reordenando términos
 \begin{equation}
 y^{j+1}_{i} - 2y^{j}_i + y^{j-1}_i = \frac{Tg(\Delta{t})^2}{\rho(\Delta{x})^2}
 	(y^j_{i+1} - 2y^j_i + y^j_{i-1}) - \frac{B\Delta{t}}{2}(y^{j+1}_i - y^{j-1}_i)
+\label{eq:aproximacion}
 \end{equation}
 
 Si en la expresión anterior el valor $\frac{Tg(\Delta{t})^2}{\rho(\Delta{x})^2}$ se iguala
@@ -92,5 +93,32 @@ $\Delta{t}$ puede obtenerse a partir de la simplificación realizada anteriormen
 y que permite obtener el tamaño del paso de tiempo a partir de las características físicas
 de la cuerda vibrante y del paso espacial definido para la subdivisión en intervalos de
 diferencias finitas durante la aproximación de las derivadas.
+
+La expresión anterior permite obtener la evolución del sistema en todo paso de tiempo
+salvo en el primero ($0 \rightarrow 1$). Sin embargo, este puede determinarse a partir del 
+conocimiento de la velocidad inicial del sistema proporcionada por 
+$\frac{\partial{y}}{\partial{x}}|_{t=0}$ como condiciones iniciales. Así, en el paso
+inicial
+
+\begin{equation}
+\frac{y^1_i - y^{-1}_i}{2\Delta{t}} = \frac{\partial{y}}{\partial{x}}|_{t=0}
+\label{eq:aprox_derivada}
+\end{equation}
+
+A partir de la ecuación \ref{eq:aproximacion} y substituyendo nuevamente el valor de 
+$\frac{Tg(\Delta{t})^2}{\rho(\Delta{x})^2}$ por la unidad se obtiene
+
+\begin{equation}
+y^{j+1}_i = y^{j}_{i+1} + y^{j}_{j-1} - y^{j-1}_i - \frac{B\Delta{t}}{2}(y^{j+1}_i - y^{j-1}_i)
+\end{equation}
+
+utilizando esta ecuación para el paso inicial y substituyendo en ella la aproximación dada
+por la ecuación \ref{eq:aprox_derivada}, y tras despejar nuevamente $y^{j+1}_i$ se obtiene
+la siguiente expresión para el paso inicial del método numérico
+
+\begin{equation}
+y^1_i = \frac{y^0_{i+1} + y^0_{i-1}}{2} + \Delta{t}\frac{\partial{y}}{\partial{x}}|_{t=0}
+	- \frac{B\Delta{t}^2}{2}\frac{\partial{y}}{\partial{x}}|_{t=0}
+\end{equation}
 
 \end{document}
