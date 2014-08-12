@@ -20,34 +20,6 @@ def bn_part(n, x):
 def calcular_bn(n, x):
 	return 2 * (bn_part(n, 1.0) - bn_part(n, 0.0))
 
-# def calcular_ux0(x, num):
-# 	ux = 0
-
-# 	for n in range(1, num):
-# 		ux += calcular_an(n, x) * sin(n * pi * x)
-
-# 	return ux
-
-# def calcular_dudx0(x, num):
-# 	dudx = 0
-
-# 	for n in range(1, num):
-# 		dudx += calcular_bn(n, x) * sin(n * pi * x)
-
-# 	return dudx
-
-# print "Forma inicial"
-# for i in range(11):
-# 	x = i * 0.1
-# 	print "%.2f \t %.2f" % (x, calcular_ux0(x, 100))
-
-# print ""
-# print ""
-# print "Velocidad inicial"
-# for i in range(11):
-# 	x = i * 0.1
-# 	print "%.2f \t %.2f" % (x, calcular_dudx0(x, 100))
-
 def calcular_y(x, t, c, num_serie):
 	y = 0
 
