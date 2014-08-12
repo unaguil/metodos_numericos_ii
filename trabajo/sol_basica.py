@@ -58,6 +58,7 @@ for p in range(1, pasos):
 
 print "dx = %.4f" % dx
 print "dt = %.4f" % dt
+print "f = %.2f" % (1 / (20 * 0.0071))
 
 print "\\begin{tabular}{%s }" % (" c" * (len(tabla[0]) + 1))
 print "\hline"

@@ -86,6 +86,7 @@ $\Delta{t}$ puede obtenerse a partir de la simplificación realizada anteriormen
 
 \begin{equation}
 \Delta{t} = \frac{\Delta{x}}{\sqrt{\frac{Tg}{\rho}}}
+\label{eq:paso_tiempo}
 \end{equation}
 
 y que permite obtener el tamaño del paso de tiempo a partir de las características físicas
@@ -174,12 +175,19 @@ Paso & 0.00 & 0.10 & 0.20 & 0.30 & 0.40 & 0.50 & 0.60 & 0.70 & 0.80 & 0.90 & 1.0
 23 & 0.00 & 0.03 & 0.06 & 0.10 & 0.09 & 0.08 & 0.07 & 0.06 & 0.06 & 0.05 & 0.00 \\
 24 & 0.00 & 0.03 & 0.06 & 0.05 & 0.04 & 0.04 & 0.03 & 0.02 & 0.01 & 0.01 & 0.00 \\
 25 & 0.00 & 0.03 & 0.02 & 0.01 & 0.00 & -0.01 & -0.01 & -0.02 & -0.03 & -0.04 & 0.00 \\
-\hline
 \end{tabular}
-
 \end{small}
+\caption{Resultados de la cuerda en vibración para $\Delta{x} = 10$}
 \label{tab:est_freq}
 \end{table}
 
+En la tabla se observa que la cuerda vuelve a su estado inicial cuando han transcurrido
+20 pasos de tiempo. Por lo tanto, teniendo en cuenta la ecuación \ref{eq:paso_tiempo} de
+donde es posible obtener el valor de un paso de tiempo $\Delta{t} = 0.0071$ s mediante la
+substitución de los parámetros de la cuerda y el intervalo espacial elegido. A partir del
+tamaño de un paso de tiempo se obtiene que
 
+\begin{equation}
+f = \frac{1}{n \Delta{t}} = \frac{1}{20 * 0.0071} = 7.04~Hz
+\end{equation}
 \end{document}
