@@ -451,6 +451,65 @@ Paso & 0.05 & 0.10 & 0.15 & 0.20 \\
 \end{figure}
 
 \subsection{Caso con amortiguamiento}
+En el caso de la cuerda con amortiguamiento es necesario utilizar las expresiones
+completas dadas por las ecuaciones \ref{eq:paso_inicial} y \ref{eq:pasos_siguientes} que
+incluyen el parámetro $B = 2.0$.
+Utilizando este esquema para la solución númerica se obtienen los resultados recogidos en
+la tabla \ref{tab:est_velocidad_amortiguado}.
+
+En este caso, como era de esperar, la cuerda no puede recuperar su posición inicial ya que
+pierde energía debido a la fuerza de amortiguamiento. Así, la altura de la cuerda es 
+cada vez menor, hasta que esta detiene prácticamente su movimiento.
+
+En la figura \ref{fig:sol_amortiguada} se muestra el código utilizado en este caso para el
+cálculo de la solución numérica, que es similar al mostrado en figura \ref{fig:sol_basica}
+pero donde se ha modificado el cálculo del paso inicial y siguientes. 
+
+\begin{table}
+\center
+\begin{small}
+\begin{tabular}{ c c c c c }
+\hline
+Paso & 0.30 & 0.40 & 0.50 & 0.60 \\
+\hline
+\hline
+0 & 0.10 (-0.21) & 0.13 (-0.24) & 0.17 (-0.25) & 0.20 (-6.07) \\
+1 & 0.10 (-0.19) & 0.13 (-0.22) & 0.16 (-6.02) & 0.16 (-5.97) \\
+2 & 0.10 (-0.14) & 0.13 (-5.92) & 0.12 (-5.89) & 0.11 (-5.92) \\
+3 & 0.10 (-5.79) & 0.09 (-5.78) & 0.08 (-5.83) & 0.07 (-5.78) \\
+4 & 0.05 (-5.65) & 0.05 (-5.70) & 0.04 (-5.67) & 0.03 (-5.70) \\
+5 & 0.01 (-5.60) & 0.01 (-5.55) & -0.00 (-5.58) & -0.01 (-5.55) \\
+6 & -0.03 (-5.46) & -0.03 (-5.47) & -0.04 (-5.42) & -0.05 (-5.47) \\
+7 & -0.06 (-5.41) & -0.07 (-5.34) & -0.08 (-5.37) & -0.09 (-5.34) \\
+8 & -0.10 (-5.29) & -0.11 (-5.31) & -0.12 (-5.26) & -0.13 (0.20) \\
+9 & -0.14 (0.19) & -0.15 (-5.21) & -0.16 (0.23) & -0.13 (0.22) \\
+10 & -0.14 (0.19) & -0.19 (5.65) & -0.16 (0.23) & -0.12 (0.22) \\
+11 & -0.14 (5.56) & -0.15 (5.55) & -0.15 (5.60) & -0.12 (0.20) \\
+12 & -0.10 (5.45) & -0.11 (5.51) & -0.11 (5.48) & -0.12 (5.51) \\
+13 & -0.06 (5.39) & -0.07 (5.38) & -0.07 (5.43) & -0.08 (5.38) \\
+14 & -0.02 (5.26) & -0.03 (5.31) & -0.04 (5.28) & -0.04 (5.31) \\
+15 & 0.02 (5.21) & 0.01 (5.16) & 0.00 (5.19) & -0.01 (5.16) \\
+16 & 0.05 (5.09) & 0.05 (5.10) & 0.04 (5.05) & 0.03 (5.10) \\
+17 & 0.09 (-0.13) & 0.08 (4.97) & 0.08 (5.00) & 0.07 (4.97) \\
+18 & 0.09 (-0.16) & 0.12 (-0.19) & 0.11 (4.90) & 0.10 (4.94) \\
+19 & 0.09 (-0.18) & 0.12 (-0.20) & 0.15 (-0.21) & 0.14 (4.86) \\
+20 & 0.09 (-0.17) & 0.12 (-0.20) & 0.14 (-0.20) & 0.17 (-5.25) \\
+21 & 0.09 (-0.16) & 0.11 (-0.18) & 0.14 (-5.21) & 0.14 (-5.16) \\
+22 & 0.08 (-0.12) & 0.11 (-5.13) & 0.11 (-5.10) & 0.10 (-5.13) \\
+23 & 0.08 (-5.02) & 0.08 (-5.01) & 0.07 (-5.05) & 0.06 (-5.01) \\
+24 & 0.05 (-4.90) & 0.04 (-4.94) & 0.03 (-4.92) & 0.03 (-4.95) \\
+\end{tabular}
+\end{small}
+\caption{Posición y velocidad de la cuerda amortiguada para $\Delta{x} = 0.1$ cm}
+\label{tab:est_velocidad_amortiguado}
+\end{table}
+
+\begin{figure}
+\inputminted[linenos, lastline=56, fontsize=\footnotesize, tabsize=2]{python}
+{../sol_amortiguada.py}
+\caption{Código para el cálculo de la solución numérica para el caso amortiguado}
+\label{fig:sol_amortiguada}
+\end{figure}
 
 \section{Conclusiones}
 
