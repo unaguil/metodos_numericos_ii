@@ -347,10 +347,21 @@ la siguiente integral
 
 obteníendose mediante su solución la expresion analítica para cada $a_n$.
 
+\begin{equation}
+	a_n = 2 [\frac{\sin{n\pi{x}} - \pi{n}x\cos{n\pi{x}}}{3\pi^3n^3}\rvert_0^\frac{3}{5}
+	+ [\frac{\sin(n\pi{x})}{2\pi^2n^2} + \frac{x\cos(n\pi{x})}{2\pi{n}} - \frac{\cos(n\pi{x})}{2\pi{n}}]\rvert_{\frac{3}{5}}^1]
+\end{equation}
+
 En el caso de $b_n$ se sigue el mismo procedimiento para obtener
 
 \begin{equation}
 	b_n n\pi{c} = 2 \int_0^1 g(x) \sin{n\pi{x}}dx = 2 \int_0^1 x(x-1) \sin{n\pi{x}}dx 
+\end{equation}
+
+para el que se obtiene una expresión analítica
+
+\begin{equation}
+	b_n n\pi{c} = 2[\frac{(2 - \pi^2n^2(x-1)x)\cos{n\pi{x}} + \pi{n}(2x - 1)\sin{n\pi{x}}}{\pi^3n^3}]\rvert_0^1 
 \end{equation}
 
 Finalmente, a partir de las expresiones obtenidas para $a_n$ y $b_n$ es posible calcular
