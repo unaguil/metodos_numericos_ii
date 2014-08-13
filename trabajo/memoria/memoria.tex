@@ -515,7 +515,30 @@ es idéntico al mostrado en la Figura \ref{fig:sol_basica}. Los cambios en las e
 utilizadas se encuentran marcados en el código.
 
 \section{Conclusiones}
+Se ha llevado a cabo la resolución de la ecuación de la cuerda vibrante mediante la
+aplicación de un método númerico consistente en la aproximación de las derivadas mediante
+diferencias finitas. Se ha obtenido un esquema iterativo que ha sido programado utilizando
+el lenguaje de programación Python y que ha permitido obtener la posición y velocidad de
+la cuerda para diferentes instantes de tiempo.
 
+Por otro lado, la precisión del método numérico ha sido comparada con solución analítica,
+que ha sido obtenida mediante la aplicación del método de separación de variables. Hay que
+tener en cuenta que la solución analítica no es completamente exacta debido a que incluye
+el cálculo de elementos de una serie de Fourier. Sin embargo, para la obtención de los
+resultados analíticos se ha calculado un número alto de elementos de la serie con el fin
+de conseguir una aproximación elevada en el resultado.
+
+Durante la comparación de los resultados se ha observado que el método numérico obtiene
+una buena precisión incluso para subdivisiones espaciales y temporales grandes. Como era
+de esperar, la precisión puede aumentarse aumentando el número de nodos y, en consecuencia,
+reduciendo el tamaño del paso de tiempo. Esto tiene como consecuencia una mayor precisión,
+pero también repercute en el número de cálculos necesarios, tanto por paso, como debido
+al aumento en el número de pasos necesarios para alcanzar determinado instante de tiempo.
+
+Por último, en este caso el método numérico es mucho más fácil de desarrollar y utilizar
+para obtener resultados que la solución numérica, que requiere la resolución de las series
+de Fourier y su posterior cálculo para cierto número de coeficientes, teniendo en cuenta,
+eso sí, los aspectos relacionados con la precisión del método.
 
 \begin{figure}
 \inputminted[linenos, lastline=54, fontsize=\footnotesize, tabsize=2]{python}
