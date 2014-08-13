@@ -546,6 +546,16 @@ reduciendo el tamaño del paso de tiempo. Esto tiene como consecuencia una mayor
 pero también repercute en el número de cálculos necesarios, tanto por paso, como debido
 al aumento en el número de pasos necesarios para alcanzar determinado instante de tiempo.
 
+El estudio de la cuerda vibrante se ha llevado a cabo en dos casos distintos: sin y con
+amortiguación. En el caso sin amortiguación la progresión de la cuerda es periódica, y la
+frecuencia de su oscilación ha podido determinarse con la búsqueda de un ciclo completo por
+simple inspección de los resultados para cierto número de pasos de tiempo. Por otro lado,
+en el caso de la cuerda amortiguada se ha comprobado que la amplitud de su movimiento
+disminuye con el tiempo y que finalmente se detiene. Se ha estimado el intervalo necesario
+para la detención de la cuerda buscando el primer paso de tiempo para el cual todos los
+nodos se encuentran sobre el eje X y tienen una velocidad nula, teniendo en cuenta cierta
+tolerancia para estos valores. 
+
 Por último, en este caso el método numérico es mucho más fácil de desarrollar y utilizar
 para obtener resultados que la solución numérica, que requiere la resolución de las series
 de Fourier y su posterior cálculo para cierto número de coeficientes, teniendo en cuenta,
