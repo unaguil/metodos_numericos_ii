@@ -1,7 +1,4 @@
 # -*- coding: utf8 -*-
-import matplotlib.pyplot as plt 
-import numpy as np
-
 from math import sin, cos, pi, sqrt
 
 def an_part1(n, x):
@@ -57,6 +54,9 @@ def obtener_valores(t, num_div, c):
 	return (x_values, y_values)
 
 if __name__ == '__main__':
+	import matplotlib.pyplot as plt 
+	import numpy as np
+
 	T = 10000
 	g = 9.8
 	w = 500

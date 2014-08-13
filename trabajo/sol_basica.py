@@ -1,71 +1,63 @@
 # -*- coding: utf8 -*-
-import matplotlib.pyplot as plt 
-import numpy as np
-
 from math import sqrt
 
-from sol_analitica import obtener_valores
-
-T = 10000
+T = 10000 # características de la cuerda
 g = 9.8
 r = 500
 L = 1
-
 c = sqrt(T * g / r)
 
-num_div = 10
-n_nodos = num_div + 1
-dx = L / float(num_div)
-dt = dx / c 
+num_div = 10 # número de divisiones de la cuerda
+n_nodos = num_div + 1 # número de nodos totales
+dx = L / float(num_div) # intervalo entre nodos
+dt = dx / c # duración de un paso de tiempo
+pasos = 25 # número de pasos que se van a calcular
 
-pasos = 25
-
-tabla_y = []
-
-#condiciones iniciales
+tabla_y = [] # inicialización de la tabla de resultados
+# cálculo de las condiciones iniciales
 init_nodos_y = []
 for i in range(n_nodos):
 	x = dx * i
-	#posiciónes iniciales
-	if x < 0.6:
+	if x < 0.6: # función dividida en dos partes 
 		init_nodos_y.append(x / 3.0)
 	else:
 		init_nodos_y.append(1 / 2.0 * (1 - x))
 
-tabla_y.append(init_nodos_y)
+tabla_y.append(init_nodos_y) # se añaden los resultados a una tabla
 
-tabla_dydt = []
-
-# pasos temporales
-for p in range(pasos):
-	# posiciones
-	nodos_y = []
+tabla_dydt = [] # inicialización de la tabla de derivadas
+for p in range(pasos): # pasos temporales
+	nodos_y = [] #inicializar posiciones
 	if p == 0:
-		# primer paso
-		for i in range(n_nodos):
+		for i in range(n_nodos): # primer paso
 			if i == 0 or i == (n_nodos - 1):
-				nodos_y.append(tabla_y[p][i]) #posicion
+				nodos_y.append(tabla_y[p][i]) # posiciones de los extremos
 			else:
+				# cálculo de la nueva posición nodo
 				x = dx * i
 				nueva_y = (tabla_y[p][i + 1] + tabla_y[p][i - 1]) / 2.0 + dt * x * (x - 1)  
-				nodos_y.append(nueva_y)
+				nodos_y.append(nueva_y) #la posición se añade a la lista de nodos
 	else:
-		# pasos siguientes
-		for i in range(n_nodos):
+		for i in range(n_nodos): # pasos siguientes (n > 1)
 			if i == 0 or i == (n_nodos - 1):
-				nodos_y.append(tabla_y[p][i])
+				nodos_y.append(tabla_y[p][i]) # posiciones de los extremos
 			else:
+				# cálculo de la nueva posición del nodo
 				nueva_y = tabla_y[p][i + 1] + tabla_y[p][i - 1] - tabla_y[p - 1][i]
 				nodos_y.append(nueva_y)
 
-	tabla_y.append(nodos_y)
+	tabla_y.append(nodos_y) # las nuevas posiciones se añaden a la tabla
 
-	nodos_dydt = []
+	nodos_dydt = [] # calculo de la velocidad de la cuerda
 	for i in range(n_nodos):
 		nueva_dydt = (tabla_y[-1][i] - tabla_y[-2][i]) / dt
 		nodos_dydt.append(nueva_dydt)
 
-	tabla_dydt.append(nodos_dydt)
+	tabla_dydt.append(nodos_dydt) # las nuevas velocidades se añaden a la tabla
+
+import matplotlib.pyplot as plt 
+import numpy as np
+from sol_analitica import obtener_valores
 
 print "dx = %.4f" % dx
 print "dt = %.4f" % dt

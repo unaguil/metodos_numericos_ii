@@ -346,25 +346,24 @@ Finalmente, a partir de las expresiones obtenidas para $a_n$ y $b_n$ es posible 
 la posición de la cuerda de forma analítica para cada $y(x,t)$ utilizando la expresión
 proporcionada por la ecuación \ref{eq:sol_analitica}.
 
-El código Python para el cálculo de los valores analiticos para la posición de la cuerda
-se muestra en la figura \ref{fig:sol_analitica}. En todos los cálculos de la solución
+El código Python que permite el cálculo de los valores analiticos para la posición de la
+cuerda se muestra en la figura \ref{fig:sol_analitica}. En todos los cálculos de la solución
 analítica mostrados en este trabajo se han utilizado 100 elementos de la serie de Fourier,
 tanto para $a_n$ como para $b_n$ para calcular la posición de la cuerda.
 
 \begin{figure}
-\inputminted[linenos, lastline=57, fontsize=\footnotesize]{python}
+\inputminted[linenos, lastline=54, fontsize=\footnotesize, tabsize=2]{python}
 {../sol_analitica.py}
-
 \caption{Código para el calculo de la solución analítica de la cuerda vibrante}
 \label{fig:sol_analitica}
 \end{figure}
 
 \subsection{Precisión del método}
 
-Las tablas \ref{tab:comparativa1}, \ref{tab:comparativa2} y \ref{tab:comparativa3} muestran los
-resultados de posición para diferentes intervalos $\Delta{x}$ y entre paréntesis se muestra
-el error $\epsilon = |y_i - y_{analitico}|$ para cada valor calculado utilizando el valor
-proporcionado para el $(x,t)$ correspondiente por la solución analítica de la sección 
+Las tablas \ref{tab:comparativa1}, \ref{tab:comparativa2} y \ref{tab:comparativa3} recogen
+los resultados de posición para diferentes intervalos $\Delta{x}$ y entre paréntesis se
+muestra el error $\epsilon = |y_i - y_{analitico}|$ para cada valor calculado utilizando el
+valor proporcionado para el $(x,t)$ correspondiente por la solución analítica de la sección 
 \ref{sec:sol_analitica}.
 
 Como puede observarse, aun con una división en intervalos de $Delta{x} = 0.2 cm$, se 
@@ -440,10 +439,18 @@ Paso & 0.05 & 0.10 & 0.15 & 0.20 \\
 9 & 0.0158 (0.0000) & 0.0316 (0.0000) & 0.0474 (0.0004) & 0.0425 (0.0000) \\
 10 & 0.0158 (0.0000) & 0.0316 (0.0004) & 0.0266 (0.0000) & 0.0216 (0.0000) \\
 \end{tabular}
-
 \caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 0.05$ cm}
 \label{tab:comparativa3}
 \end{table}
+
+\begin{figure}
+\inputminted[linenos, lastline=56, fontsize=\footnotesize, tabsize=2]{python}
+{../sol_basica.py}
+\caption{Código para el cálculo de la solución numérica para el caso no amortiguado}
+\label{fig:sol_basica}
+\end{figure}
+
+\subsection{Caso con amortiguamiento}
 
 \section{Conclusiones}
 
