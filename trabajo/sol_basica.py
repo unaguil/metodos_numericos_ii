@@ -78,37 +78,43 @@ print "dt = %.4f" % dt
 # 	print "\\\\"
 # print "\\end{tabular}"
 
-columns = [3, 4, 5, 6]
-print "\\begin{tabular}{%s }" % (" c" * (len(columns) + 1))
-print "\hline"
-print "Paso",
-for i in columns:
-	print "& %.2f" % (dx * i),
-print "\\\\"	
-print "\hline"
-print "\hline"
-for i in range(len(tabla_y) - 1):
-	print i,
-	for n in columns:
-		print "& %.2f (%.2f)" % (tabla_y[i][n], tabla_dydt[i][n]),
-	print "\\\\"
-print "\\end{tabular}"
+# columns = [3, 4, 5, 6]
+# print "\\begin{tabular}{%s }" % (" c" * (len(columns) + 1))
+# print "\hline"
+# print "Paso",
+# for i in columns:
+# 	print "& %.2f" % (dx * i),
+# print "\\\\"	
+# print "\hline"
+# print "\hline"
+# for i in range(len(tabla_y) - 1):
+# 	print i,
+# 	for n in columns:
+# 		print "& %.2f (%.2f)" % (tabla_y[i][n], tabla_dydt[i][n]),
+# 	print "\\\\"
+# print "\\end{tabular}"
 
-# # fig, ax = plt.subplots()
+fig, ax = plt.subplots()
 
-# # for s in range(len(tabla_y)):
-# # 	if s == 0:
-# # 		x_values = [dx * i for i in range(n_nodos)]
-# # 		y_values = tabla_y[s]
-# # 		points, = ax.plot(x_values, y_values, marker='o', linestyle='-')
-# # 		ax.set_xlim(0, 1) 
-# # 		ax.set_ylim(-2.0, 2.0) 
-# # 	else:
-# # 		new_x_values = [dx * i for i in range(n_nodos)]
-# # 		new_y_values = tabla_y[s]
-# # 		points.set_data(new_x_values, new_y_values)
+import numpy
 
-# # 	plt.pause(0.005)
+for s in range(len(tabla_y)):
+	ax.set_xlabel('dx=0.1 cm dt=%.4f s (n=%d, t=%.3f s)' % (dt, s, (s * dt)))
+	if s == 0:
+		x_values = [dx * i for i in range(n_nodos)]
+		y_values = tabla_y[s]
+		points, = ax.plot(x_values, y_values, marker='o', linestyle='-')
+		ax.set_xticks(numpy.arange(0, 1.1, 0.1))
+		ax.set_yticks(numpy.arange(-0.4, 0.41, 0.1)) 
+	else:
+		new_x_values = [dx * i for i in range(n_nodos)]
+		new_y_values = tabla_y[s]
+		points.set_data(new_x_values, new_y_values)
+
+	if s in [0, 5, 10, 17]:
+		plt.savefig("string-%s.png" % s)
+
+	plt.pause(0.005)
 
 # columns = 5
 # print "\\begin{tabular}{%s }" % (" c" * columns)
