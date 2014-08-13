@@ -140,7 +140,7 @@ expresión indicada en las condiciones iniciales del problema dadas en
 \end{subequations}
 
 Utilizando las expresiones anteriores de forma iterativa e inicializando las posiciones de
-los nodos de la cuerda para $t=0$ segun las condiciones indicadas en el problema
+los nodos de la cuerda para $t=0$ según las condiciones indicadas en el problema
 \eqref{eq:condiciones_iniciales} se obtienen los resultados recogidos en la Tabla 
 \ref{tab:est_freq} para la posición de la cuerda en pasos consecutivos de tiempo, 
 utilizando un espaciado de $\Delta{x} = 0.1$ cm.
@@ -279,7 +279,7 @@ están fijos en $u(0) = u(1) = 0$. Estas condiciones junto con la ecuación
 	u''(x) + Ku(x) = 0
 \end{equation}
 
-permiten plantear un problema de valores propios cuya solucion viene dada por
+permiten plantear un problema de valores propios cuya solución viene dada por
 
 \begin{equation}
 	K = n^2\pi^2
@@ -291,7 +291,7 @@ siendo las funciones propias correspondientes
 	u_n(x) = c_n\sin{n\pi{x}}
 \end{equation}
 
-donde $c_n$ son constantes arbritrarias no nulas que deben ser determinadas.
+donde $c_n$ son constantes arbitrarias no nulas que deben ser determinadas.
 
 A continuación se considera la segunda ecuación de \eqref{eq:sistema_cuerda} con los
 valores de K obtenidos
@@ -345,7 +345,7 @@ la siguiente integral
 	+ \int_{\frac{3}{5}}^1 \frac{1}{2}(1-x) \sin{n\pi{x}}dx]
 \end{equation}
 
-obteníendose mediante su solución la expresion analítica para cada $a_n$.
+obteniéndose mediante su solución la expresión analítica para cada $a_n$.
 
 \begin{equation}
 	a_n = 2 [\frac{\sin{n\pi{x}} - \pi{n}x\cos{n\pi{x}}}{3\pi^3n^3}\rvert_0^\frac{3}{5}
@@ -368,7 +368,7 @@ Finalmente, a partir de las expresiones obtenidas para $a_n$ y $b_n$ es posible 
 la posición de la cuerda de forma analítica para cada $y(x,t)$ utilizando la expresión
 proporcionada por la ecuación \eqref{eq:sol_analitica}.
 
-El código Python que permite el cálculo de los valores analiticos para la posición de la
+El código Python que permite el cálculo de los valores analíticos para la posición de la
 cuerda se muestra en la Figura \ref{fig:sol_analitica}. En todos los cálculos de la solución
 analítica recogidos en este trabajo se han utilizado 100 elementos de la serie de Fourier,
 tanto para $a_n$ como para $b_n$ con la finalidad de calcular la posición de la cuerda.
@@ -464,7 +464,7 @@ Paso & 0.05 & 0.10 & 0.15 & 0.20 \\
 En el caso de la cuerda con amortiguamiento es necesario utilizar las expresiones
 completas dadas por las ecuaciones \eqref{eq:paso_inicial} y \eqref{eq:pasos_siguientes}
 y que incluyen el parámetro $B = 2.0$.
-Utilizando este esquema para la solución númerica se obtienen los resultados recogidos en
+Utilizando este esquema para la solución numérica se obtienen los resultados recogidos en
 la tabla \ref{tab:est_velocidad_amortiguado}.
 
 En este caso, como era de esperar, la cuerda no puede recuperar su posición inicial ya que
@@ -527,7 +527,7 @@ utilizadas se encuentran marcados en el código.
 
 \section{Conclusiones}
 Se ha llevado a cabo la resolución de la ecuación de la cuerda vibrante mediante la
-aplicación de un método númerico consistente en la aproximación de las derivadas mediante
+aplicación de un método numérico consistente en la aproximación de las derivadas mediante
 diferencias finitas. Se ha obtenido un esquema iterativo que ha sido programado utilizando
 el lenguaje de programación Python y que ha permitido obtener la posición y velocidad de
 la cuerda para diferentes instantes de tiempo.
