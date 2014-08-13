@@ -34,6 +34,8 @@ for i in range(n_nodos):
 
 tabla_y.append(init_nodos_y)
 
+tabla_dydt = []
+
 # pasos temporales
 for p in range(pasos):
 	# posiciones
@@ -42,21 +44,28 @@ for p in range(pasos):
 		# primer paso
 		for i in range(n_nodos):
 			if i == 0 or i == (n_nodos - 1):
-				nodos_y.append(tabla_y[0][i]) #posicion
+				nodos_y.append(tabla_y[p][i]) #posicion
 			else:
 				x = dx * i
-				nuevo_valor = (tabla_y[0][i + 1] + tabla_y[0][i - 1]) / 2.0 + dt * x * (x - 1)  
-				nodos_y.append(nuevo_valor)
+				nueva_y = (tabla_y[p][i + 1] + tabla_y[p][i - 1]) / 2.0 + dt * x * (x - 1)  
+				nodos_y.append(nueva_y)
 	else:
 		# pasos siguientes
 		for i in range(n_nodos):
 			if i == 0 or i == (n_nodos - 1):
 				nodos_y.append(tabla_y[p][i])
 			else:
-				nuevo_valor = tabla_y[p][i + 1] + tabla_y[p][i - 1] - tabla_y[p - 1][i]
-				nodos_y.append(nuevo_valor)
+				nueva_y = tabla_y[p][i + 1] + tabla_y[p][i - 1] - tabla_y[p - 1][i]
+				nodos_y.append(nueva_y)
 
 	tabla_y.append(nodos_y)
+
+	nodos_dydt = []
+	for i in range(n_nodos):
+		nueva_dydt = tabla_y[-1][i]	- tabla_y[-2][i]
+		nodos_dydt.append(nueva_dydt)
+
+	tabla_dydt.append(nodos_dydt)
 
 print "dx = %.4f" % dx
 print "dt = %.4f" % dt
@@ -73,7 +82,7 @@ print "\hline"
 for i in range(len(tabla_y)):
 	print i,
 	for n in range(len(tabla_y[i])):
-		print "& %.2f" % tabla_y[i][n],
+		print "& %.2f (%.2f)" % (tabla_y[i][n], tabla_dydt[i][n]),
 	print "\\\\"
 print "\\end{tabular}"
 
