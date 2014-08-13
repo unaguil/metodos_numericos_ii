@@ -252,13 +252,62 @@ y(x,t) = u(x)v(t)
 \end{equation}
 
 es posible obtener el siguiente sistema de ecuaciones haciendo que cada parte de la ecuación
-dependa únicamente de una variable e igualando cada lado a $-K$.
+dependa únicamente de una variable e igualando cada lado a cierta constante $-K$.
 
 \begin{subequations}
 \begin{flalign}
-	&v''(t) = K\\
+	&\frac{v''(t)}{c^2v(t)} = -K\\
+	&\frac{u''(x)}{u(x)} = -K
 \end{flalign}
+\label{eq:sistema_cuerda}
 \end{subequations}
+
+De acuerdo a las condiciones iniciales del problema sabemos que los extremos de la cuerda
+están fijos en $u(0) = u(1) = 0$. Estas condiciones junto con la ecuación
+
+\begin{equation}
+	u''(x) + Ku(x) = 0
+\end{equation}
+
+plantea un problema de valores propios con solucion
+
+\begin{equation}
+	K = n^2\pi^2
+\end{equation}
+
+siendo las autofunciones correspondientes
+
+\begin{equation}
+	u_n(x) = c_n\sin{n\pi{x}}
+\end{equation}
+
+donde las $c_n$ son constantes arbritrarias no nulas que deben ser determinadas.
+Se considera ahora la segunda ecuación de \ref{eq:sistema_cuerda} con los valores de K
+obtenidos
+
+\begin{equation}
+	v''(t) + c^2n^2\pi^2v(t) = 0
+\end{equation}
+ 
+Una solución general para esta ecuación es (para cada n = 1, 2, 3)
+
+\begin{equation}
+	u(x) = c_{n,1}\cos{n\pi{c}t} + c_{n,2}\sin{n\pi{c}t}
+\end{equation}
+
+Al combinar los resultados anteriores en $y(x,t) = u(x)v(t)$ y absorver las constantes, se
+obtiene para cada $n = 1, 2, 3 ...$
+
+\begin{equation}
+	y_n(x,t) = (a_n\cos{n\pi{c}t} + b_n\sin{n\pi{c}t})\sin{n\pi{x}}
+\end{equation}
+
+sin embargo, hay que tener en cuenta que la solución completa es la combinación de todos
+los posibles valores de n, por lo que finalmente
+
+\begin{equation}
+	y(x,t) = \sum\limits_{i=1}^\infty[a_n\cos{n\pi{c}t} + b_n\sin{n\pi{c}t}]\sin{n\pi{x}}
+\end{equation}
 
 \subsection{Precisión del método}
 
