@@ -36,8 +36,10 @@ for p in range(pasos): # pasos temporales
 			else:
 				# cálculo de la nueva posición nodo
 				x = dx * i
+				###########################################################
 				nueva_y = (tabla_y[p][i + 1] + tabla_y[p][i - 1]) / 2.0 + \
 					dt * x * (x - 1) - B * dt*dt / 2.0 * x * (x - 1)   
+				###########################################################
 				nodos_y.append(nueva_y) #la posición se añade a la lista de nodos
 	else:
 		for i in range(n_nodos): # pasos siguientes (n > 1)
@@ -45,8 +47,10 @@ for p in range(pasos): # pasos temporales
 				nodos_y.append(tabla_y[p][i]) # posiciones de los extremos
 			else:
 				# cálculo de la nueva posición del nodo
+				###########################################################
 				nueva_y = (tabla_y[p][i + 1] + tabla_y[p][i - 1] + \
 					(B * dt / 2.0 - 1) * tabla_y[p - 1][i]) / (B * dt / 2.0 + 1)
+				###########################################################
 				nodos_y.append(nueva_y)
 
 	tabla_y.append(nodos_y) # las nuevas posiciones se añaden a la tabla

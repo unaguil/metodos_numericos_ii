@@ -14,8 +14,11 @@
 \maketitle
 \tableofcontents
 
+\pagebreak
+\renewcommand{\tablename}{Tabla}
+
 \section{Introducción}
-La ecuación que define el movimiento de la cuerda vibrante amortiguada es la siguiente
+La ecuación que define el movimiento de una cuerda vibrante amortiguada es la siguiente
 
 \begin{equation}
 \frac{\partial^2 y}{\partial{t^2}} = \frac{Tg}{\rho}\frac{\partial^2 y}{\partial{x^2}} 
@@ -24,12 +27,12 @@ La ecuación que define el movimiento de la cuerda vibrante amortiguada es la si
 \end{equation}
 
 donde $B$ es la magnitud de la fuerza de amortiguamiento, mientras que T es la tensión de
-la cuerda, $g$ la aceleración de la gravedad y $\rho$ su densidad lineal. 
+la misma, $\rho$ su densidad lineal y $g$ la aceleración de la gravedad. 
+
 La ecuación de la cuerda vibrante es una ecuación de tipo hiperbólico que para su resolución
 es necesario conocer los valores de frontera (posición y/o velocidad de los extremos) y
 dos condiciones iniciales, los valores de $y$ y la velocidad de cada punto en el instante
 inicial $t=0$.
-
 En el caso del problema propuesto, las condiciones iniciales son
 
 \begin{subequations}
@@ -42,9 +45,9 @@ En el caso del problema propuesto, las condiciones iniciales son
 \end{subequations}
 
 \section{Método de resolución}
-La ecuación puede ser resuelta de forma numérica mediante la substitución de las derivadas
-por aproximaciones con diferencias finitas. Así, cada una de las derivadas que aparecen
-pueden substituirse por las siguientes aproximaciones
+La ecuación \eqref{eq:cuerda} puede ser resuelta de forma numérica mediante la substitución
+de las derivadas por aproximaciones con diferencias finitas. Así, cada una de las derivadas
+que aparecen pueden substituirse por las siguientes aproximaciones
 
 \begin{subequations}
 \begin{flalign}
@@ -54,7 +57,7 @@ pueden substituirse por las siguientes aproximaciones
 \end{flalign}
 \end{subequations}
 
-Substituyendo las aproximaciones en la ecuación \ref{eq:cuerda}, se obtiene la siguiente
+Substituyendo las aproximaciones en la ecuación \eqref{eq:cuerda}, se obtiene la siguiente
 expresión
 
 \begin{equation}
@@ -90,30 +93,30 @@ $\Delta{t}$ puede obtenerse a partir de la simplificación realizada anteriormen
 \end{equation}
 
 y que permite obtener el tamaño del paso de tiempo a partir de las características físicas
-de la cuerda vibrante y del paso espacial definido para la subdivisión en intervalos de
-diferencias finitas durante la aproximación de las derivadas.
+de la cuerda vibrante y del paso espacial definido para la subdivisión de la cuerda en
+intervalos de diferencias finitas durante la aproximación de las derivadas.
 
-La expresión anterior permite obtener la evolución del sistema en todo paso de tiempo
-salvo en el primero ($0 \rightarrow 1$). Sin embargo, este puede determinarse a partir del 
-conocimiento de la velocidad inicial del sistema proporcionada por 
-$\frac{\partial{y}}{\partial{x}}|_{t=0}$ como condiciones iniciales. Así, en el paso
-inicial
+La expresión anterior \eqref{eq:pasos_siguientes} permite obtener la evolución del sistema
+en todo paso de tiempo salvo en el primero ($0 \rightarrow 1$). Sin embargo, este paso
+puede determinarse a partir del conocimiento de la velocidad inicial del sistema
+proporcionada por $\frac{\partial{y}}{\partial{x}}|_{t=0}$ como condiciones iniciales.
+Así, en el paso inicial
 
 \begin{equation}
 \frac{y^1_i - y^{-1}_i}{2\Delta{t}} = \frac{\partial{y}}{\partial{x}}|_{t=0}
 \label{eq:aprox_derivada}
 \end{equation}
 
-A partir de la ecuación \ref{eq:aproximacion} y substituyendo nuevamente el valor de 
+y a partir de la ecuación \eqref{eq:aproximacion} y substituyendo nuevamente el valor de 
 $\frac{Tg(\Delta{t})^2}{\rho(\Delta{x})^2}$ por la unidad se obtiene
 
 \begin{equation}
 y^{j+1}_i = y^{j}_{i+1} + y^{j}_{j-1} - y^{j-1}_i - \frac{B\Delta{t}}{2}(y^{j+1}_i - y^{j-1}_i)
 \end{equation}
 
-utilizando esta ecuación para el paso inicial y substituyendo en ella la aproximación dada
-por la ecuación \ref{eq:aprox_derivada}, y tras despejar nuevamente $y^{j+1}_i$ se obtiene
-la siguiente expresión para el paso inicial del método numérico
+donde para $j=0$ y substituyendo la aproximación dada por la ecuación
+\ref{eq:aprox_derivada} y, tras despejar nuevamente $y^{j+1}_i$, se obtiene la siguiente
+expresión para el paso inicial del método numérico
 
 \begin{equation}
 y^1_i = \frac{y^0_{i+1} + y^0_{i-1}}{2} + \Delta{t}\frac{\partial{y}}{\partial{x}}|_{t=0}
@@ -122,11 +125,12 @@ y^1_i = \frac{y^0_{i+1} + y^0_{i-1}}{2} + \Delta{t}\frac{\partial{y}}{\partial{x
 \end{equation}
 
 \section{Caso no amortiguado}
-Para el caso de la cuerda vibrante sin amortiguamiento, las ecuaciones para su
-solución mediante el método numérico por aproximación de diferencias finitas se obtienen
-haciendo $B=0$ en las ecuaciones \ref{eq:pasos_siguientes} y \ref{eq:paso_inicial}. Además,
-se ha llevado a cabo la substitución de $\frac{\partial{y}}{\partial{x}}|_{t=0}$ por la
-expresión indicada por las condiciones iniciales del problema.
+Para el caso de la cuerda vibrante sin amortiguamiento, las ecuaciones para su resolución
+mediante el método numérico por aproximación de diferencias finitas se obtienen haciendo
+$B=0$ en las ecuaciones \eqref{eq:pasos_siguientes} y \eqref{eq:paso_inicial}. Además, es
+necesario llevar a cabo la substitución de $\frac{\partial{y}}{\partial{x}}|_{t=0}$ por la
+expresión indicada en las condiciones iniciales del problema dadas en
+\eqref{eq:condiciones_iniciales}.
 
 \begin{subequations}
 \begin{flalign}
@@ -135,10 +139,21 @@ expresión indicada por las condiciones iniciales del problema.
 \end{flalign}
 \end{subequations}
 
-Utilizando las expresiones anteriores de forma iterativa e inicializando los valores de
+Utilizando las expresiones anteriores de forma iterativa e inicializando las posiciones de
 los nodos de la cuerda para $t=0$ segun las condiciones indicadas en el problema
-(eq. \ref{eq:condiciones_iniciales}) se obtienen los resultados recogidos en la Tabla 
-\ref{tab:est_freq} para la posición de la cuerda en pasos consecutivos de tiempo. 
+\eqref{eq:condiciones_iniciales} se obtienen los resultados recogidos en la Tabla 
+\ref{tab:est_freq} para la posición de la cuerda en pasos consecutivos de tiempo, 
+utilizando un espaciado de $\Delta{x} = 0.1$ cm.
+
+En la Tabla \ref{tab:est_freq} se observa que la cuerda vuelve a su estado inicial cuando
+han transcurrido 20 pasos de tiempo. Por lo tanto, teniendo en cuenta la ecuación
+\ref{eq:paso_tiempo} de donde es posible obtener el valor de un paso de tiempo
+$\Delta{t} = 0.0071$ s mediante la substitución de los parámetros de la cuerda y el
+intervalo espacial elegido. A partir del tamaño de un paso de tiempo se obtiene que
+
+\begin{equation}
+f = \frac{1}{n \Delta{t}} = \frac{1}{20 * 0.0071} = 7.04~Hz
+\end{equation}
 
 \begin{table}
 \center
@@ -182,19 +197,9 @@ Paso & 0.00 & 0.10 & 0.20 & 0.30 & 0.40 & 0.50 & 0.60 & 0.70 & 0.80 & 0.90 & 1.0
 \label{tab:est_freq}
 \end{table}
 
-En la tabla se observa que la cuerda vuelve a su estado inicial cuando han transcurrido
-20 pasos de tiempo. Por lo tanto, teniendo en cuenta la ecuación \ref{eq:paso_tiempo} de
-donde es posible obtener el valor de un paso de tiempo $\Delta{t} = 0.0071$ s mediante la
-substitución de los parámetros de la cuerda y el intervalo espacial elegido. A partir del
-tamaño de un paso de tiempo se obtiene que
-
-\begin{equation}
-f = \frac{1}{n \Delta{t}} = \frac{1}{20 * 0.0071} = 7.04~Hz
-\end{equation}
-
 En la tabla \ref{tab:est_velocidad} se recogen nuevamente los resultados para algunos nodos
-para el mismo intervalo espacial $\Delta{x} = 0.1$ cm. Sin embargo, en este caso se han
-calculado también las velocidades de los puntos de la cuerda. Las velocidades han sido
+usando el mismo intervalo espacial $\Delta{x} = 0.1$ cm. Sin embargo, en este caso se han
+añadido también las velocidades de los puntos de la cuerda. Las velocidades han sido
 calculadas utilizando las diferencias de posición entre dos instantes consecutivos de
 tiempo de acuerdo al siguiente esquema
 
@@ -202,7 +207,10 @@ tiempo de acuerdo al siguiente esquema
 \frac{\partial{y}}{\partial{t}} = \frac{y^{j + 1}_i - y^{j}_i}{\Delta{t}}
 \end{equation} 
 
-\begin{table}
+De nuevo puede observarse que la velocidad inicial es recuperada en el paso de tiempo 20,
+punto en el cual comienza a repetirse el ciclo de movimiento de la cuerda.
+
+\begin{table}[t]
 \center
 \begin{small}
 \begin{tabular}{ c c c c c }
@@ -230,7 +238,9 @@ Paso & 0.30 & 0.40 & 0.50 & 0.60 \\
 17 & 0.10 (-0.15) & 0.10 (5.65) & 0.09 (5.64) & 0.08 (5.65) \\
 18 & 0.10 (-0.19) & 0.14 (-0.22) & 0.13 (5.60) & 0.12 (5.61) \\
 19 & 0.10 (-0.21) & 0.14 (-0.24) & 0.17 (-0.25) & 0.16 (5.59) \\
+\hline
 20 & 0.10 (-0.21) & 0.13 (-0.24) & 0.17 (-0.25) & 0.20 (-6.07) \\
+\hline
 21 & 0.10 (-0.19) & 0.13 (-0.22) & 0.16 (-6.06) & 0.16 (-6.05) \\
 22 & 0.10 (-0.15) & 0.13 (-6.01) & 0.12 (-6.02) & 0.11 (-6.01) \\
 23 & 0.10 (-5.92) & 0.09 (-5.95) & 0.08 (-5.96) & 0.07 (-5.95) \\
@@ -244,7 +254,7 @@ Paso & 0.30 & 0.40 & 0.50 & 0.60 \\
 \subsection{Solución analítica}
 \label{sec:sol_analitica}
 La solución analítica en el caso de la cuerda vibrante puede obtenerse mediante el método
-de separación de variables. Si en la ecuación \ref{eq:cuerda} se realiza la siguiente
+de separación de variables. Si en la ecuación \eqref{eq:cuerda} se realiza la siguiente
 substitución
 
 \begin{equation}
@@ -269,40 +279,41 @@ están fijos en $u(0) = u(1) = 0$. Estas condiciones junto con la ecuación
 	u''(x) + Ku(x) = 0
 \end{equation}
 
-plantea un problema de valores propios con solucion
+permiten plantear un problema de valores propios cuya solucion viene dada por
 
 \begin{equation}
 	K = n^2\pi^2
 \end{equation}
 
-siendo las autofunciones correspondientes
+siendo las funciones propias correspondientes
 
 \begin{equation}
 	u_n(x) = c_n\sin{n\pi{x}}
 \end{equation}
 
-donde las $c_n$ son constantes arbritrarias no nulas que deben ser determinadas.
-Se considera ahora la segunda ecuación de \ref{eq:sistema_cuerda} con los valores de K
-obtenidos
+donde $c_n$ son constantes arbritrarias no nulas que deben ser determinadas.
+
+A continuación se considera la segunda ecuación de \eqref{eq:sistema_cuerda} con los
+valores de K obtenidos
 
 \begin{equation}
 	v''(t) + c^2n^2\pi^2v(t) = 0
 \end{equation}
  
-Una solución general para esta ecuación es (para cada n = 1, 2, 3)
+La solución general para esta ecuación es (para cada n = 1, 2, 3)
 
 \begin{equation}
 	u(x) = c_{n,1}\cos{n\pi{c}t} + c_{n,2}\sin{n\pi{c}t}
 \end{equation}
 
-Al combinar los resultados anteriores en $y(x,t) = u(x)v(t)$ y absorver las constantes, se
+Al combinar los resultados anteriores en $y(x,t) = u(x)v(t)$ y absorber las constantes, se
 obtiene para cada $n = 1, 2, 3 ...$
 
 \begin{equation}
 	y_n(x,t) = (a_n\cos{n\pi{c}t} + b_n\sin{n\pi{c}t})\sin{n\pi{x}}
 \end{equation}
 
-sin embargo, hay que tener en cuenta que la solución completa es la combinación de todos
+Sin embargo, hay que tener en cuenta que la solución completa es la combinación de todos
 los posibles valores de n, por lo que finalmente
 
 \begin{equation}
@@ -316,8 +327,8 @@ Ahora pueden aplicarse las condiciones iniciales, que en el caso del problema so
 	y(x, 0) = f(x)~~~~~~~~~~~~~~\frac{\partial{y}}{\partial{t}}(x, 0) = g(x)
 \end{equation}
 
-obteniéndose así las siguientes condiciones que permiten determinar el valor de las
-constantes
+obteniéndose de esta forma las siguientes condiciones que permiten determinar el valor de
+las constantes
 
 \begin{subequations}
 \begin{flalign}
@@ -334,9 +345,9 @@ la siguiente integral
 	+ \int_{\frac{3}{5}}^1 \frac{1}{2}(1-x) \sin{n\pi{x}}dx]
 \end{equation}
 
-obteníendose así la expresion analítica para cada $a_n$.
+obteníendose mediante su solución la expresion analítica para cada $a_n$.
 
-Por otro lado, en el caso de $b_n$ se sigue el mismo procedimiento para obtener
+En el caso de $b_n$ se sigue el mismo procedimiento para obtener
 
 \begin{equation}
 	b_n n\pi{c} = 2 \int_0^1 g(x) \sin{n\pi{x}}dx = 2 \int_0^1 x(x-1) \sin{n\pi{x}}dx 
@@ -344,35 +355,30 @@ Por otro lado, en el caso de $b_n$ se sigue el mismo procedimiento para obtener
 
 Finalmente, a partir de las expresiones obtenidas para $a_n$ y $b_n$ es posible calcular
 la posición de la cuerda de forma analítica para cada $y(x,t)$ utilizando la expresión
-proporcionada por la ecuación \ref{eq:sol_analitica}.
+proporcionada por la ecuación \eqref{eq:sol_analitica}.
 
 El código Python que permite el cálculo de los valores analiticos para la posición de la
-cuerda se muestra en la figura \ref{fig:sol_analitica}. En todos los cálculos de la solución
-analítica mostrados en este trabajo se han utilizado 100 elementos de la serie de Fourier,
-tanto para $a_n$ como para $b_n$ para calcular la posición de la cuerda.
-
-\begin{figure}
-\inputminted[linenos, lastline=54, fontsize=\footnotesize, tabsize=2]{python}
-{../sol_analitica.py}
-\caption{Código para el calculo de la solución analítica de la cuerda vibrante}
-\label{fig:sol_analitica}
-\end{figure}
+cuerda se muestra en la Figura \ref{fig:sol_analitica}. En todos los cálculos de la solución
+analítica recogidos en este trabajo se han utilizado 100 elementos de la serie de Fourier,
+tanto para $a_n$ como para $b_n$ con la finalidad de calcular la posición de la cuerda.
 
 \subsection{Precisión del método}
 
-Las tablas \ref{tab:comparativa1}, \ref{tab:comparativa2} y \ref{tab:comparativa3} recogen
-los resultados de posición para diferentes intervalos $\Delta{x}$ y entre paréntesis se
-muestra el error $\epsilon = |y_i - y_{analitico}|$ para cada valor calculado utilizando el
-valor proporcionado para el $(x,t)$ correspondiente por la solución analítica de la sección 
-\ref{sec:sol_analitica}.
+Las Tablas \ref{tab:comparativa1}, \ref{tab:comparativa2} y \ref{tab:comparativa3} recogen
+los resultados del cálculo de posición para diferentes intervalos $\Delta{x}$, mostrando
+entre paréntesis el error $\epsilon = |y_i - y_{analitico}|$ por cada valor calculado,
+utilizando para ello el resultado proporcionado para el $(x,t)$ correspondiente por la
+solución analítica obtenida en la sección \ref{sec:sol_analitica}.
 
-Como puede observarse, aun con una división en intervalos de $Delta{x} = 0.2 cm$, se 
-obtiene una buena precisión comparada con la solución analítica, ya que existe únicamente
-una diferencia a partir de la 4 cifra decimal. Es diferencia se reduce, como puede
-observarse en las siguientes tablas, al incrementar el número de intervalos en los que se
-divide la cuerda, lo que reduce no solamente el valor de $\Delta{x}$ sino también el de
-$\Delta{t}$ que se encuentra relacionado directamente con este, por lo que es necesario
-llevar a cabo un mayor número de calculos para llegar a los mismos instantes de tiempo.
+Como puede observarse, aun con una división en intervalos de $\Delta{x} = 0.2$ cm, se 
+obtiene una buena precisión comparada con la solución analítica, ya que existe diferencia
+únicamente a partir de la cuarta cifra decimal. Esta diferencia se reduce, como puede
+observarse en las Tablas \ref{tab:comparativa2} y \ref{tab:comparativa3}, al incrementar
+el número de intervalos en los que se divide la cuerda, lo que reduce no solamente el
+valor de $\Delta{x}$ sino también el de $\Delta{t}$ que se encuentra relacionado
+directamente con este. Esta reducción en el tamaño de un paso de tiempo significa que es
+necesario llevar a cabo un mayor número de cálculos para alcanzar un determinado instante
+de tiempo.
 
 \begin{table}
 \center
@@ -443,27 +449,17 @@ Paso & 0.05 & 0.10 & 0.15 & 0.20 \\
 \label{tab:comparativa3}
 \end{table}
 
-\begin{figure}
-\inputminted[linenos, lastline=56, fontsize=\footnotesize, tabsize=2]{python}
-{../sol_basica.py}
-\caption{Código para el cálculo de la solución numérica para el caso no amortiguado}
-\label{fig:sol_basica}
-\end{figure}
-
 \subsection{Caso con amortiguamiento}
 En el caso de la cuerda con amortiguamiento es necesario utilizar las expresiones
-completas dadas por las ecuaciones \ref{eq:paso_inicial} y \ref{eq:pasos_siguientes} que
-incluyen el parámetro $B = 2.0$.
+completas dadas por las ecuaciones \eqref{eq:paso_inicial} y \eqref{eq:pasos_siguientes}
+y que incluyen el parámetro $B = 2.0$.
 Utilizando este esquema para la solución númerica se obtienen los resultados recogidos en
 la tabla \ref{tab:est_velocidad_amortiguado}.
 
 En este caso, como era de esperar, la cuerda no puede recuperar su posición inicial ya que
 pierde energía debido a la fuerza de amortiguamiento. Así, la altura de la cuerda es 
-cada vez menor, hasta que esta detiene prácticamente su movimiento.
-
-En la figura \ref{fig:sol_amortiguada} se muestra el código utilizado en este caso para el
-cálculo de la solución numérica, que es similar al mostrado en figura \ref{fig:sol_basica}
-pero donde se ha modificado el cálculo del paso inicial y siguientes.
+cada vez menor, hasta que para cierto instante de tiempo detiene prácticamente su
+movimiento.
 
 Utilizando la solución numérica puede estimarse el tiempo para el que el movimiento de la
 cuerda se detiene dentro de un tolerancia determinada. Se ha determinado en qué momento
@@ -511,13 +507,35 @@ Paso & 0.30 & 0.40 & 0.50 & 0.60 \\
 \label{tab:est_velocidad_amortiguado}
 \end{table}
 
+En la Figura \ref{fig:sol_amortiguada} se muestra el código utilizado en este caso para el
+cálculo de la solución numérica, que es similar al mostrado en Figura \ref{fig:sol_basica}
+pero donde se ha modificado el cálculo del paso inicial y siguientes. En este caso
+únicamente se incluye el código correspondiente a los pasos iterativos, ya que el resto
+es idéntico al mostrado en la Figura \ref{fig:sol_basica}. Los cambios en las expresiones
+utilizadas se encuentran marcados en el código.
+
+\section{Conclusiones}
+
+
 \begin{figure}
-\inputminted[linenos, lastline=59, fontsize=\footnotesize, tabsize=2]{python}
+\inputminted[linenos, lastline=54, fontsize=\footnotesize, tabsize=2]{python}
+{../sol_analitica.py}
+\caption{Código para el calculo de la solución analítica de la cuerda vibrante}
+\label{fig:sol_analitica}
+\end{figure}
+
+\begin{figure}
+\inputminted[linenos, lastline=56, fontsize=\footnotesize, tabsize=2]{python}
+{../sol_basica.py}
+\caption{Código para el cálculo de la solución numérica para el caso no amortiguado}
+\label{fig:sol_basica}
+\end{figure}
+
+\begin{figure}
+\inputminted[linenos, firstline=29, firstnumber=29, lastline=52, fontsize=\footnotesize, tabsize=2]{python}
 {../sol_amortiguada.py}
 \caption{Código para el cálculo de la solución numérica para el caso amortiguado}
 \label{fig:sol_amortiguada}
 \end{figure}
-
-\section{Conclusiones}
 
 \end{document}
