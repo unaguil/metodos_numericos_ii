@@ -463,7 +463,14 @@ cada vez menor, hasta que esta detiene prácticamente su movimiento.
 
 En la figura \ref{fig:sol_amortiguada} se muestra el código utilizado en este caso para el
 cálculo de la solución numérica, que es similar al mostrado en figura \ref{fig:sol_basica}
-pero donde se ha modificado el cálculo del paso inicial y siguientes. 
+pero donde se ha modificado el cálculo del paso inicial y siguientes.
+
+Utilizando la solución numérica puede estimarse el tiempo para el que el movimiento de la
+cuerda se detiene dentro de un tolerancia determinada. Se ha determinado en qué momento
+cada uno de los nodos de la cuerda se encuentran en el punto $0.0$ con un velocidad $0.0$
+teniendo en cuenta una tolerancia de $0.0005$ en ambos casos. Se ha comprobado que esto
+sucede para un número de pasos igual a 1300, por lo que se estima que la vibración de la
+cuerda se detiene para $1300 * 0.0071 = 9.23$ segundos desde su puesta en marcha.
 
 \begin{table}
 \center
