@@ -41,7 +41,7 @@ En el caso del problema propuesto, las condiciones iniciales son
 \label{eq:condiciones_iniciales}
 \end{subequations}
 
-\section{Método numérico}
+\section{Método de resolución}
 La ecuación puede ser resuelta de forma numérica mediante la substitución de las derivadas
 por aproximaciones con diferencias finitas. Así, cada una de las derivadas que aparecen
 pueden substituirse por las siguientes aproximaciones
@@ -136,7 +136,7 @@ expresión indicada por las condiciones iniciales del problema.
 \end{subequations}
 
 Utilizando las expresiones anteriores de forma iterativa e inicializando los valores de
-los nodos de la cuerda segun las condiciones indicadas en el problema
+los nodos de la cuerda para $t=0$ segun las condiciones indicadas en el problema
 (eq. \ref{eq:condiciones_iniciales}) se obtienen los resultados recogidos en la Tabla 
 \ref{tab:est_freq} para la posición de la cuerda en pasos consecutivos de tiempo. 
 
@@ -194,6 +194,22 @@ f = \frac{1}{n \Delta{t}} = \frac{1}{20 * 0.0071} = 7.04~Hz
 
 \subsection{Solución analítica}
 \label{sec:sol_analitica}
+La solución analítica en el caso de la cuerda vibrante puede obtenerse mediante el método
+de separación de variables. Si en la ecuación \ref{eq:cuerda} se realiza la siguiente
+substitución
+
+\begin{equation}
+y(x,t) = u(x)v(t)
+\end{equation}
+
+es posible obtener el siguiente sistema de ecuaciones haciendo que cada parte de la ecuación
+dependa únicamente de una variable e igualando cada lado a $-K$.
+
+\begin{subequations}
+\begin{flalign}
+	&v''(t) = K\\
+\end{flalign}
+\end{subequations}
 
 \subsection{Precisión del método}
 
@@ -280,5 +296,7 @@ Paso & 0.05 & 0.10 & 0.15 & 0.20 \\
 \caption{Precisión del método comparado con la solución analítica para $\Delta{x} = 0.05$ cm}
 \label{tab:comparativa3}
 \end{table}
+
+\section{Conclusiones}
 
 \end{document}
