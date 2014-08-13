@@ -62,13 +62,13 @@ for p in range(pasos):
 
 	nodos_dydt = []
 	for i in range(n_nodos):
-		nueva_dydt = tabla_y[-1][i]	- tabla_y[-2][i]
+		nueva_dydt = (tabla_y[-1][i] - tabla_y[-2][i]) / dt
 		nodos_dydt.append(nueva_dydt)
 
 	tabla_dydt.append(nodos_dydt)
 
-# print "dx = %.4f" % dx
-# print "dt = %.4f" % dt
+print "dx = %.4f" % dx
+print "dt = %.4f" % dt
 # print "f = %.2f" % (1 / (20 * 0.0071))
 
 # print "\\begin{tabular}{%s }" % (" c" * (len(tabla_y[0]) + 1))
