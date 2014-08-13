@@ -67,21 +67,37 @@ for p in range(pasos):
 
 	tabla_dydt.append(nodos_dydt)
 
-print "dx = %.4f" % dx
-print "dt = %.4f" % dt
-print "f = %.2f" % (1 / (20 * 0.0071))
+# print "dx = %.4f" % dx
+# print "dt = %.4f" % dt
+# print "f = %.2f" % (1 / (20 * 0.0071))
 
-print "\\begin{tabular}{%s }" % (" c" * (len(tabla_y[0]) + 1))
+# print "\\begin{tabular}{%s }" % (" c" * (len(tabla_y[0]) + 1))
+# print "\hline"
+# print "Paso",
+# for i in range(len(tabla_y[0])):
+# 	print "& %.2f" % (dx * i),
+# print "\\\\"	
+# print "\hline"
+# print "\hline"
+# for i in range(len(tabla_y)):
+# 	print i,
+# 	for n in range(len(tabla_y[i])):
+# 		print "& %.2f" % tabla_y[i][n],
+# 	print "\\\\"
+# print "\\end{tabular}"
+
+columns = [3, 4, 5, 6]
+print "\\begin{tabular}{%s }" % (" c" * (len(columns) + 1))
 print "\hline"
 print "Paso",
-for i in range(len(tabla_y[0])):
+for i in columns:
 	print "& %.2f" % (dx * i),
 print "\\\\"	
 print "\hline"
 print "\hline"
-for i in range(len(tabla_y)):
+for i in range(len(tabla_y) - 1):
 	print i,
-	for n in range(len(tabla_y[i])):
+	for n in columns:
 		print "& %.2f (%.2f)" % (tabla_y[i][n], tabla_dydt[i][n]),
 	print "\\\\"
 print "\\end{tabular}"
