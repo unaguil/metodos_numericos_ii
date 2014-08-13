@@ -62,75 +62,46 @@ for p in range(pasos): # pasos temporales
 
 	tabla_dydt.append(nodos_dydt) # las nuevas velocidades se añaden a la tabla
 
-import matplotlib.pyplot as plt 
-import numpy as np
-from sol_analitica import obtener_valores
+def imprimir_valores():
+	print "\\begin{tabular}{%s }" % (" c" * (len(tabla_y[0]) + 1))
+	print "\hline"
+	print "Paso",
+	for i in range(len(tabla_y[0])):
+		print "& %.2f" % (dx * i),
+	print "\\\\"	
+	print "\hline"
+	print "\hline"
+	for i in range(len(tabla_y)):
+		print i,
+		for n in range(len(tabla_y[i])):
+			print "& %.2f" % tabla_y[i][n],
+		print "\\\\"
+	print "\\end{tabular}"
 
-print "dx = %.4f" % dx
-print "dt = %.4f" % dt
-# print "f = %.2f" % (1 / (20 * 0.0071))
+def generar_grafica():
+	fig, ax = plt.subplots()
 
-# print "\\begin{tabular}{%s }" % (" c" * (len(tabla_y[0]) + 1))
-# print "\hline"
-# print "Paso",
-# for i in range(len(tabla_y[0])):
-# 	print "& %.2f" % (dx * i),
-# print "\\\\"	
-# print "\hline"
-# print "\hline"
-# for i in range(len(tabla_y)):
-# 	print i,
-# 	for n in range(len(tabla_y[i])):
-# 		print "& %.2f" % tabla_y[i][n],
-# 	print "\\\\"
-# print "\\end{tabular}"
+	for s in range(len(tabla_y)):
+		if s == 0:
+			x_values = [dx * i for i in range(n_nodos)]
+			y_values = tabla_y[s]
+			points, = ax.plot(x_values, y_values, marker='o', linestyle='-')
+			ax.set_xlim(0, 1) 
+			ax.set_ylim(-2.0, 2.0) 
+		else:
+			new_x_values = [dx * i for i in range(n_nodos)]
+			new_y_values = tabla_y[s]
+			points.set_data(new_x_values, new_y_values)
 
-columns = [3, 4, 5, 6]
-print "\\begin{tabular}{%s }" % (" c" * (len(columns) + 1))
-print "\hline"
-print "Paso",
-for i in columns:
-	print "& %.2f" % (dx * i),
-print "\\\\"	
-print "\hline"
-print "\hline"
-for i in range(len(tabla_y) - 1):
-	print i,
-	for n in columns:
-		print "& %.2f (%.2f)" % (tabla_y[i][n], tabla_dydt[i][n]),
-	print "\\\\"
-print "\\end{tabular}"
+		plt.pause(0.005)
 
-fig, ax = plt.subplots()
+if __name__ == '__main__':
+	import matplotlib.pyplot as plt 
+	import numpy as np
+	from sol_analitica import obtener_valores
 
-for s in range(len(tabla_y)):
-	if s == 0:
-		x_values = [dx * i for i in range(n_nodos)]
-		y_values = tabla_y[s]
-		points, = ax.plot(x_values, y_values, marker='o', linestyle='-')
-		ax.set_xlim(0, 1) 
-		ax.set_ylim(-2.0, 2.0) 
-	else:
-		new_x_values = [dx * i for i in range(n_nodos)]
-		new_y_values = tabla_y[s]
-		points.set_data(new_x_values, new_y_values)
+	print "dx = %.4f" % dx
+	print "dt = %.4f" % dt
+	print "f = %.2f" % (1 / (20 * 0.0071))
 
-	plt.pause(0.005)
-
-# columns = 5
-# print "\\begin{tabular}{%s }" % (" c" * columns)
-# print "\hline"
-# print "Paso",
-# for i in range(1, columns):
-# 	print "& %.2f" % (dx * i),
-# print "\\\\"	
-# print "\hline"
-# print "\hline"
-# for i in range(len(tabla_y)):
-# 	print i,
-# 	t = dt * i
-# 	_, sol_analitica = obtener_valores(t, num_div, c)
-# 	for n in range(1, columns):
-# 		print "& %.4f (%.4f)" % (tabla_y[i][n], abs(tabla_y[i][n] - sol_analitica[n])),
-# 	print "\\\\"
-# print "\\end{tabular}"
+	generar_grafica()
