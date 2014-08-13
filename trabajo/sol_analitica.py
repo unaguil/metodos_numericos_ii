@@ -28,7 +28,7 @@ def calcular_y(x, t, c, num_serie):
 
 	return y
 
-def get_values(t, num_div, c):
+def obtener_valores(t, num_div, c):
 	x_values = []
 	y_values = []
 
@@ -58,12 +58,12 @@ if __name__ == '__main__':
 	for s in range(pasos):
 		t = dt * s
 		if s == 0:
-			x_values, y_values = get_values(t, num_div_x, c)
+			x_values, y_values = obtener_valores(t, num_div_x, c)
 			points, = ax.plot(x_values, y_values, marker='o', linestyle='-')
 			ax.set_xlim(0, 1) 
 			ax.set_ylim(-0.5, 0.5) 
 		else:
-			new_x_values, new_y_values = get_values(t, num_div_x, c)
+			new_x_values, new_y_values = obtener_valores(t, num_div_x, c)
 			points.set_data(new_x_values, new_y_values)
 
 		plt.pause(0.005)
@@ -72,7 +72,7 @@ if __name__ == '__main__':
 	for s in range(pasos):
 		t = dt * s
 		print "%d \t %0.4f" % (s, t),
-		y_values = get_values(t, num_div_x, c)[1]
+		y_values = obtener_valores(t, num_div_x, c)[1]
 		for i in range(len(y_values)):
 			print "\t %.2f" % y_values[i],
 		print ""
