@@ -21,11 +21,9 @@ dt = dx / c
 pasos = 25
 
 tabla_y = []
-tabla_dydt = []
 
 #condiciones iniciales
 init_nodos_y = []
-init_nodos_dydt = []
 for i in range(n_nodos):
 	x = dx * i
 	#posiciónes iniciales
@@ -34,11 +32,7 @@ for i in range(n_nodos):
 	else:
 		init_nodos_y.append(1 / 2.0 * (1 - x))
 
-	#velocidades iniciales
-	init_nodos_dydt.append(x * (x - 1))
-
 tabla_y.append(init_nodos_y)
-tabla_dydt.append(init_nodos_dydt)
 
 # pasos temporales
 for p in range(pasos):
@@ -64,17 +58,6 @@ for p in range(pasos):
 
 	tabla_y.append(nodos_y)
 
-	nodos_dydt = []
-	for i in range(n_nodos):
-		if i == 0 or i == (n_nodos - 1):
-			nodos_dydt.append(tabla_dydt[p][i])
-		else:
-			x = dx * i
-			nuevo_valor = (T * g) / (r * dt) * (tabla_y[p][i + 1] - 2 * tabla_y[p][i] + tabla_y[p][i - 1]) + tabla_dydt[p][i]
-			nodos_dydt.append(nuevo_valor)
-
-	tabla_dydt.append(nodos_dydt)
-
 print "dx = %.4f" % dx
 print "dt = %.4f" % dt
 print "f = %.2f" % (1 / (20 * 0.0071))
@@ -90,7 +73,7 @@ print "\hline"
 for i in range(len(tabla_y)):
 	print i,
 	for n in range(len(tabla_y[i])):
-		print "& %.2f (%.2f)" % (tabla_y[i][n], tabla_dydt[i][n]),
+		print "& %.2f" % tabla_y[i][n],
 	print "\\\\"
 print "\\end{tabular}"
 
