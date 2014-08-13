@@ -4,7 +4,7 @@ import numpy as np
 
 from math import sqrt
 
-from sol_analitica import get_values
+from sol_analitica import obtener_valores
 
 T = 10000
 g = 9.8
@@ -130,7 +130,7 @@ print "\\end{tabular}"
 # for i in range(len(tabla_y)):
 # 	print i,
 # 	t = dt * i
-# 	_, sol_analitica = get_values(t, num_div, c)
+# 	_, sol_analitica = obtener_valores(t, num_div, c)
 # 	for n in range(1, columns):
 # 		print "& %.4f (%.4f)" % (tabla_y[i][n], abs(tabla_y[i][n] - sol_analitica[n])),
 # 	print "\\\\"
